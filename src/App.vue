@@ -16,7 +16,7 @@ export default {
   },
   mounted() {
     db.collection('users')
-      .doc('')
+      .doc('e1MJVteAnDUTQboerbTM')
       .get()
       .then(snapshot => {
         this.user = snapshot.data().name
