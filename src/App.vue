@@ -2,7 +2,13 @@
   <div id="app">
     <Navigation :user="user" @logout="logout" />
 
-    <router-view :user="user" @logout="logout" @addRoom="addRoom" />
+    <router-view
+      :user="user"
+      :rooms="rooms"
+      @logout="logout"
+      @addRoom="addRoom"
+      @deleteRoom="deleteRoom"
+    />
   </div>
 </template>
 <script>
@@ -10,9 +16,11 @@ import Navigation from '@/components/Navigation'
 import db from './db.js'
 import Firebase from 'firebase'
 export default {
+  name: 'App',
   data: function() {
     return {
-      user: null
+      user: null,
+      rooms: []
     }
   },
   methods: {
@@ -33,12 +41,39 @@ export default {
           name: payload,
           createdAt: Firebase.firestore.FieldValue.serverTimestamp()
         })
+    },
+    deleteRoom: function(payload) {
+      db.collection('users')
+        .doc(this.user.uid)
+        .collection('rooms')
+        .doc(payload)
+        .delete()
     }
   },
+
   mounted() {
     Firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.user = user
+        db.collection('users')
+          .doc(this.user.uid)
+          .collection('rooms')
+          .onSnapshot(snapshot => {
+            const snapData = []
+            snapshot.forEach(doc => {
+              snapData.push({
+                id: doc.id,
+                name: doc.data().name
+              })
+            })
+            this.rooms = snapData.sort((a, b) => {
+              if (a.name.toLowerCase() < b.name.toLowerCase()) {
+                return -1
+              } else {
+                return 1
+              }
+            })
+          })
       }
     })
   },
@@ -48,6 +83,6 @@ export default {
 }
 </script>
 <style lang="scss">
-$primary: #5f2882;
+$primary: #4886c0;
 @import 'node_modules/bootstrap/scss/bootstrap';
 </style>

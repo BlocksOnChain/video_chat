@@ -101,11 +101,11 @@ export default {
                   displayName: info.displayName
                 })
                 .then(() => {
-                  this.$router.replace('/')
+                  this.$router.replace('/rooms')
                 })
             },
             error => {
-              this.error = error.messeage
+              this.error = error.message
             }
           )
       }
@@ -113,7 +113,7 @@ export default {
   },
   watch: {
     passTwo: function() {
-      if (this.passOne !== '' && this.passTwo && this.passTwo !== this.passOne) {
+      if (this.passOne !== '' && this.passTwo !== '' && this.passTwo !== this.passOne) {
         this.error = 'passwords must match'
       } else {
         this.error = null
