@@ -24,7 +24,7 @@
             attendees.
           </p>
           <h1 class="animate__pulse" v-if="user.displayName != 'somename'">
-            ESRA AŞKIM SENİ ÇOK SEVİYOM
+            Hello Dear Friend!
           </h1>
           <router-link class="nav-item nav-link" to="/rooms" v-if="user">Rooms</router-link>
 
