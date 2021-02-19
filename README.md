@@ -1,5 +1,6 @@
 # video-chat
 Runs with Firebase and WebRTC if you want to run you should arrange Firebase with a firebase'.js' file with configuration of the web api key and etc.
+Not done yet!the front-end and firebase is ready. video_chat page has not comitted yet.
 
 
 ## Project setup
