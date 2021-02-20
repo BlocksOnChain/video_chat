@@ -17,7 +17,7 @@
           <img :src="image" />
           <img :src="image" />
 
-          <h4 class="display-4 text-primary mb-2" v-if="user.displayName != 'Esra'">Video Chat</h4>
+          <h4 class="display-4 text-primary mb-2">Video Chat</h4>
           <p class="lead">
             This app uses Firebase for real time communication and WebRTC to create video chats
             between multiple users, allowing you to create rooms for your meetings and invite
